@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEfeect ,useState } from "react";
 import "./index.css";
 
 function ToDoList() {
     const [task, setTask] = useState([]);
     const [newTask, setNewTask] = useState("");
 
+    useEffect(()=>{
+        const savedTasks=JSON.parse(localStorage.getItem("tasks"));
+        if(savedTasks){
+            setTask[savedTasks};
+        }
+        
+    },[])
+
+    useEffect(()=>{
+        localStorage.setItem("tasks", JSON.stringify(task));
+    },[task]);
+    
     function handleInputChange(event) {
         setNewTask(event.target.value);
     }
+
 
     function handleKeyPress(event) {
         if (event.key === "Enter") {
