@@ -1,4 +1,4 @@
-import React, { useEfeect ,useState } from "react";
+import React, { useEffect ,useState } from "react";
 import "./index.css";
 
 function ToDoList() {
@@ -7,14 +7,16 @@ function ToDoList() {
 
     useEffect(()=>{
         const savedTasks=JSON.parse(localStorage.getItem("tasks"));
-        if(savedTasks){
-            setTask[savedTasks};
+        if(savedTasks && Array.isArray(savedTasks)){
+            setTask(savedTasks);
         }
         
     },[])
 
     useEffect(()=>{
+        if(task.length>0){
         localStorage.setItem("tasks", JSON.stringify(task));
+        }
     },[task]);
     
     function handleInputChange(event) {
